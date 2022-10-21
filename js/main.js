@@ -4,7 +4,7 @@ const urlArticle1 = "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg";
 let name1 = "Anastacio";
 name1 = name1.toUpperCase();
 const description1 = "Risueño, cariñoso, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
-const race1 = "British Shorthair";
+let race1 = "";
 
 const urlArticle2 = "https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg";
 let name2= "Fiona";
@@ -18,8 +18,50 @@ name3 = name3.toUpperCase();
 const description3 = "Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
 const race3 = "British Shorthair";
 
+//Ocultar/ver formulario y Mostar/ocultar formulario
+const form = document.querySelector(".js-new-form"); 
+const icon = document.querySelector('.icon');
+
+icon.addEventListener('click', (event) => {
+  event.preventDefault();
+  if (form.classList.contains("collapsed")){
+    form.classList.remove("collapsed");
+  }
+  else{
+    form.classList.add("collapsed");
+  }
+});
+
+// Boton añadir
+const button = document.querySelector('.js-btn-add');
+const inputDesc = document.querySelector('.js-input-desc');
+const inputPhoto = document.querySelector('.js-input-photo');
+const inputName = document.querySelector('.js-input-name');
+const labelMesageError = document.querySelector('.js-label-error');
+
+button.addEventListener('click', (event)=>{
+  event.preventDefault();
+  const valueDesc = inputDesc.value;
+  const valuePhoto = inputPhoto.value;
+  const valueName = inputName.value;
+
+  if (valueDesc === '' || valuePhoto === '' || valueName === '') {
+    labelMesageError.innerHTML = 'Debe rellenar todos los valores'
+  } else {
+    labelMesageError.innerHTML = 'se ha añadido con exito'
+  }
+});
 
 
+
+// bonus raza gatito
+let html = '';
+if (race1 === "") {
+  html = `No se ha especificado la raza`;
+  race1 = html;
+} else {
+  html = race1;
+};
 
 
 
@@ -83,22 +125,3 @@ if (description3.includes(descrSearchText)){
   list.innerHTML += kitten3;
 }
 
-//Ocultar/ver formulario
-const form = document.querySelector(".js-new-form"); 
-
-if (form.classList.contains("collapsed")){
-  form.classList.remove("collapsed");
-}
-else{
-  form.classList.add("collapsed");
-}
-
-
-// bonus raza gatito
-
-let html = '';
-if (race1 === "") {
-  html = `No se ha especificado la raza`;
-} else {
-  html = race1;
-}
