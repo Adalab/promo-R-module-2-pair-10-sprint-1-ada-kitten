@@ -18,6 +18,8 @@ name3 = name3.toUpperCase();
 const description3 = "Risueño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
 const race3 = "British Shorthair";
 
+// funciones ver y ocultar formulario
+
 //Ocultar/ver formulario y Mostar/ocultar formulario
 const form = document.querySelector(".js-new-form"); 
 const icon = document.querySelector('.icon');
@@ -32,8 +34,9 @@ icon.addEventListener('click', (event) => {
   }
 });
 
-// Boton añadir
+// Boton añadir y validar formulario gatito
 const button = document.querySelector('.js-btn-add');
+const inputRace = document.querySelector('.js-input-race');
 const inputDesc = document.querySelector('.js-input-desc');
 const inputPhoto = document.querySelector('.js-input-photo');
 const inputName = document.querySelector('.js-input-name');
@@ -44,11 +47,33 @@ button.addEventListener('click', (event)=>{
   const valueDesc = inputDesc.value;
   const valuePhoto = inputPhoto.value;
   const valueName = inputName.value;
+  const valueRace = inputRace.value;
 
   if (valueDesc === '' || valuePhoto === '' || valueName === '') {
     labelMesageError.innerHTML = 'Debe rellenar todos los valores'
-  } else {
+  } 
+  else if(valueRace === '' || valueDesc === ''){
+    labelMesageError.innerHTML = 'Falta un campo por rellenar'  
+  }
+  else {
     labelMesageError.innerHTML = 'se ha añadido con exito'
+  }
+});
+
+// cancelar formulario 
+const formulary = document.querySelector('.form');
+const cancelBtn = document.querySelector('.button-cancel');
+
+cancelBtn.addEventListener('click', (event) => {
+  event.preventDefault();
+  inputName.value = '';
+  inputDesc.value = '';
+  inputPhoto.value = '';
+  inputRace.value = '';
+
+  // if (form.classList.contains('collapsed')=== false)
+  if (!form.classList.contains("collapsed")){
+    form.classList.add("collapsed");
   }
 });
 
