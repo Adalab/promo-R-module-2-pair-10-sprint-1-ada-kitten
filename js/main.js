@@ -106,7 +106,7 @@ function renderKitten(kittenData) {
       src="${kittenData.image}"
       alt="gatito"
     />
-    ${html}
+    ${html}l
     <h3 class="card_title">${kittenData.name}</h3>
     <h4 class="card_race">${kittenData.race}</h4>
     <p class="card_description">
