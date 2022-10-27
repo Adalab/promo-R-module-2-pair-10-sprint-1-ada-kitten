@@ -1,28 +1,31 @@
 "use strict";
 
 //kitten1
-const urlArticle1 = "https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg";
-let name1 = "Anastacio";
-name1 = name1.toUpperCase();
-const description1 = "Risueño, ,  cariñoso, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
-let race1 = "";
-
+const kittenData_1 = {
+  image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
+  name: 'Anastacio',
+  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  race: '',
+};
 //kitten2
-const urlArticle2 = "https://images.emedicinehealth.com/images/article/main_image/cat-scratch-disease.jpg";
-let name2= "Fiona";
-name2 = name2.toUpperCase();
-const description2 = "Risueño, amable, cariñoso, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
-const race2 = "British Shorthair";
-
+const kittenData_2 = {
+  image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
+  name: 'Anastacio',
+  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  race: 'British Shorthair',
+};
 //kitten3
-const urlArticle3 = "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2019_39/3021711/190923-cat-pet-stock-cs-1052a.jpg";
-let name3= "Cielo";
-name3 = name3.toUpperCase();
-const description3 = "Risueño, cariñoso, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!";
-const race3 = "British Shorthair";
+const kittenData_3 = {
+  image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
+  name: 'Anastacio',
+  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  race: 'British Shorthair',
+};
 
 
+const kittenDataList = [kittenData_1, kittenData_2,kittenData_3];
 
+console.log(kittenDataList);
 
 // funciones ver y ocultar formulario
 const newFormElement = document.querySelector(".js-new-form"); 
@@ -92,55 +95,46 @@ const cancelNewKitten = (event) => {
 
 cancelBtn.addEventListener ('click', cancelNewKitten);
 
-
-
-  // let html = '';
-// if (race === "") {
-//   html = `No se ha especificado la raza`;
-//   race = html;
-// } else {
-//   html = race;
-// };
-
-
-renderRace(race1);
-
 // crear gatitto en HTML
 const list = document.querySelector(".js-list");
-function renderKitten(url, desc, name, race) {
+function renderKitten(kittenData) {
+  const html = renderRace(kittenData);
   const kitten = `<li class="card">
   <article>
     <img
       class="card_img"
-      src="${url}"
+      src="${kittenData.image}"
       alt="gatito"
     />
-    <h3 class="card_title">${name}</h3>
-    <h4 class="card_race">${race}</h4>
+    ${html}
+    <h3 class="card_title">${kittenData.name}</h3>
+    <h4 class="card_race">${kittenData.race}</h4>
     <p class="card_description">
-      ${desc}
+      ${kittenData.desc}
     </p>
   </article>
   </li>`;
+        
   return kitten;
 };
-const kitten1 = renderKitten(urlArticle1, description1, name1, race1);
-const kitten2 = renderKitten(urlArticle2, description2, name2, race2);
-const kitten3 = renderKitten(urlArticle3, description3, name3, race3);
+let kitten1 = renderKitten(kittenData_1);
+const kitten2 = renderKitten(kittenData_2);
+const kitten3 = renderKitten(kittenData_3);
 
-// mostrar la raza o no 
-
-function renderRace(race){
+function renderRace(kittenData){
   let html = '';
-  if (race === ""){
+  if (kittenData.race === ""){
     html = '<p class="card_race">No se ha especificado la raza</p>';
   }else{
-    html = `<h3 class="card_race">${race}</h3>`;
+    html = `<h3 class="card_race">${kittenData.race}</h3>`;
   }
   return html;
 }
-const html = renderRace(race1);
-kitten1.innerHTML = html;
+
+
+// mostrar la raza o no 
+
+
 
 // filtrar por descripción
 const buttonSearch = document.querySelector('.js-button-search');
@@ -163,23 +157,5 @@ const filterKitten = (event) => {
 };
 buttonSearch.addEventListener('click', filterKitten);
 
-// list.innerHTML = kitten1 + kitten2+ kitten3;
-
-
-// Búsqueda por descripción
-
-// const input_search_desc = document.querySelector('.js_in_search_desc');
-// input_search_desc.value = 'cariñoso';
-// const descrSearchText = input_search_desc.value;
-// if (description1.includes(descrSearchText)){
-//   list.innerHTML += kitten1;
-// }
-// if (description2.includes(descrSearchText)){
-//   list.innerHTML += kitten2;
-
-// }
-// if (description3.includes(descrSearchText)){
-//   list.innerHTML += kitten3;
-// };
-
+list.innerHTML = kitten1 + kitten2+ kitten3;
 
