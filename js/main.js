@@ -4,7 +4,7 @@
 const kittenData_1 = {
   image: 'https://ychef.files.bbci.co.uk/976x549/p07ryyyj.jpg',
   name: 'Anastacio',
-  desc: 'Ruiseño, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
+  desc: 'Ruiseño, amable, juguetón, le guta estar tranquilo y que nadie le moleste. Es una maravilla acariciarle!',
   race: '',
 };
 //kitten2
@@ -22,8 +22,48 @@ const kittenData_3 = {
   race: 'British Shorthair',
 };
 
+/*for (let i = 0; i<10; i++){
+}
+for (const i of kittenDataList){
+}
+*/
+const list = document.querySelector(".js-list");
 
 const kittenDataList = [kittenData_1, kittenData_2,kittenData_3];
+
+function renderKittenList(kittenDataList) {
+  let html = '';
+  for  (const kitten of kittenDataList){
+   html += renderKitten(kitten);
+  }
+  list.innerHTML = html;
+}
+renderKittenList(kittenDataList);
+
+// crear gatitto en HTML
+function renderKitten(kittenData) {
+  const html = renderRace(kittenData);
+  const kitten = `<li class="card">
+  <article>
+    <img
+      class="card_img"
+      src="${kittenData.image}"
+      alt="gatito"
+    />
+    ${html}
+    <h3 class="card_title">${kittenData.name}</h3>
+    <h4 class="card_race">${kittenData.race}</h4>
+    <p class="card_description">
+      ${kittenData.desc}
+    </p>
+  </article>
+  </li>`;
+        
+  return kitten;
+};
+let kitten1 = renderKitten(kittenData_1);
+const kitten2 = renderKitten(kittenData_2);
+const kitten3 = renderKitten(kittenData_3);
 
 console.log(kittenDataList);
 
@@ -95,31 +135,8 @@ const cancelNewKitten = (event) => {
 
 cancelBtn.addEventListener ('click', cancelNewKitten);
 
-// crear gatitto en HTML
-const list = document.querySelector(".js-list");
-function renderKitten(kittenData) {
-  const html = renderRace(kittenData);
-  const kitten = `<li class="card">
-  <article>
-    <img
-      class="card_img"
-      src="${kittenData.image}"
-      alt="gatito"
-    />
-    ${html}l
-    <h3 class="card_title">${kittenData.name}</h3>
-    <h4 class="card_race">${kittenData.race}</h4>
-    <p class="card_description">
-      ${kittenData.desc}
-    </p>
-  </article>
-  </li>`;
-        
-  return kitten;
-};
-let kitten1 = renderKitten(kittenData_1);
-const kitten2 = renderKitten(kittenData_2);
-const kitten3 = renderKitten(kittenData_3);
+
+
 
 function renderRace(kittenData){
   let html = '';
@@ -140,22 +157,19 @@ function renderRace(kittenData){
 const buttonSearch = document.querySelector('.js-button-search');
 const input_search_desc = document.querySelector('.js_in_search_desc');
 
-const filterKitten = (event) => {
-  event.preventDefault();
-  const descrSearchText = input_search_desc.value;
-  if (description1.includes(descrSearchText)){
-    list.innerHTML += kitten1;
-  }
-  else if (description2.includes(descrSearchText)){
-    list.innerHTML += kitten2;
-  
-  }
-  else if (description3.includes(descrSearchText)){
-    list.innerHTML += kitten3;
-  }
-  
-};
+
 buttonSearch.addEventListener('click', filterKitten);
 
-list.innerHTML = kitten1 + kitten2+ kitten3;
+function filterKitten(event) {
+  event.preventDefault();
+  const descrSearchText = input_search_desc.value;
+  list.innerHTML = '';
+  for (const kitten of kittenDataList) {
+   if (kitten.desc.includes(descrSearchText)){
+    list.innerHTML += renderKitten(kitten);
+   }
+  }
+}
+
+// list.innerHTML = kitten1 + kitten2+ kitten3;
 
